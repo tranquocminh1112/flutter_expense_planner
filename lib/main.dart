@@ -1,5 +1,4 @@
-import 'package:flutter/gestures.dart';
-
+import './widgets/chart.dart';
 import './widgets/new_transaction.dart';
 import './widgets/transaction_list.dart';
 import './models/transaction.dart';
@@ -61,6 +60,16 @@ class _MyHomePageState extends State<MyHomePage> {
     // ),
   ];
 
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
+
   void _addNewTransaction(String title, double amount) {
     final tx = Transaction(
       title: title,
@@ -104,14 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: ListView(
         children: [
-          Container(
-            child: Card(
-              child: Text('CHART!'),
-              elevation: 5,
-              color: Colors.blue,
-            ),
-            width: double.infinity,
-          ),
+          Chart(_recentTransactions),
           TransactionList(_userTransactions),
         ],
       ),
