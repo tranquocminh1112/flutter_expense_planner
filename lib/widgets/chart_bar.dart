@@ -27,7 +27,7 @@ class CharBar extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10)),
               ),
               FractionallySizedBox(
-                heightFactor: (spendingPctAmount / 2),
+                heightFactor: spendingPctAmount,
                 child: Container(
                   decoration: BoxDecoration(
                       color: Theme.of(context).primaryColor,
